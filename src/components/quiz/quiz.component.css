@@ -1,0 +1,23 @@
+.next {
+  background: var(--color-orange);
+  padding: var(--spacing);
+  margin-top: var(--spacing);
+  border-radius: var(--answer-border-radius);
+  border: none;
+  width: 100px;
+  align-self: flex-end;
+  font-size: 15px;
+  color: var(--color-white);
+  order: 1;
+  cursor: pointer;
+}
+
+#question {
+  font-size: 1.5em;
+  color: var(--color-text);
+  margin-top: calc(var(--spacing) * 4);
+}
+
+.hidden {
+  display: none;
+}
