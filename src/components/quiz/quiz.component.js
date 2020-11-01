@@ -35,7 +35,7 @@ export class Quiz {
   renderNextButton(htmlContainer) {
     const nextButton = this.createElement('button', 'Next', 'next-button');
     nextButton.className = 'next';
-    nextButton.addEventListener('click', (event) => { this.renderQuestion(); });
+    nextButton.addEventListener('click', () => { this.renderQuestion(); });
 
     this.nextButton = nextButton;
     htmlContainer.appendChild(nextButton);
@@ -81,7 +81,7 @@ export class Quiz {
     return element;
   }
 
-  handleAnswer(event) {
+  handleAnswer() {
     this.nextButton.style.display = 'block';
   }
 }
