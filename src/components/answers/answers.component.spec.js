@@ -1,34 +1,34 @@
-import { AnswersComponent } from './answers.component';
+import { AnswersComponent } from "./answers.component";
+import { screen } from "@testing-library/dom";
+import userEvent from '@testing-library/user-event'
 
-const renderAnswerComponent = () => {
-  const array = ['Madrid', 'Pekin', 'Kiev', 'Santander'];
-  const capital = 'Madrid';
-  const div = document.createElement('div');
+describe('Testing Answer component', () => {
+  let answers;
+  let correctAnswer;
 
-  return new AnswersComponent(div, array, capital);
-}
+  beforeAll(() => {
+    answers = ['Madrid', 'Pekin', 'Bilbao', 'Kiev'];
+    correctAnswer = 'Madrid';
 
-describe('Rendering Answers component', () => {
-  let answersComponent;
-
-  beforeEach(() => {
-    answersComponent = renderAnswerComponent();
+    new AnswersComponent(document.body, answers, correctAnswer);
   });
 
-  it('should render answers', () => {
-    expect(answersComponent.answerButtons.length).toBe(4);
-		answersComponent.answerButtons.forEach((button) => {
-			expect(button.tagName).toBe('BUTTON');
-		});
+  test('should render a button for each answer', () => {
+		// Seleccionamos los elementos del body que tengan el rol "button"
+    const buttons = screen.getAllByRole('button');
+		// Comprobamos que son visibles y que contienen el texto que corresponde
+    buttons.forEach((button, i) => {
+      expect(button).toBeVisible();
+      expect(button).toHaveTextContent(answers[i])
+    });
   });
 
-  it('should disable buttons', () => {
-    const buttons = answersComponent.answerButtons;
-    answersComponent.disableAllButtons(buttons, 'Madrid');
-    expect(buttons[0].hasAttribute('disabled')).toBe(true);
+  test('should validate the answer on button click', () => {
+    // Seleccionamos el botón por texto, como haría el usuario
+    const answer = screen.getByText('Bilbao');
+    // Lanzamos click
+    userEvent.click(answer);
+		// custom properties ♥️
+    expect(answer).toHaveStyle({ background: "var(--color-error)" });
   });
-
-  it('is enabled by default', () => {
-    expect(answersComponent.answerButtons[0].hasAttribute('disabled')).toBe(false);
-  })
-})
+});
