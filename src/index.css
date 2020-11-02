@@ -17,9 +17,7 @@
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
+:root {
   --color-primary: #ABAFE6;
   --color-text: #2F527B;
   --color-background: #5256A1;
@@ -31,6 +29,12 @@ html, body {
   --spacing: 10px;
 
   --answer-border-radius: 5px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
   font-family: 'Poppins';
 }
 

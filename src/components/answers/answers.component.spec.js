@@ -23,12 +23,40 @@ describe('Testing Answer component', () => {
     });
   });
 
-  test('should validate the answer on button click', () => {
-    // Seleccionamos el botón por texto, como haría el usuario
-    const answer = screen.getByText('Bilbao');
-    // Lanzamos click
-    userEvent.click(answer);
-		// custom properties ♥️
-    expect(answer).toHaveStyle({ background: "var(--color-error)" });
+  describe('after click on a incorrect answer', () => {
+    let answer;
+
+    beforeAll(() => {
+      answer = screen.getByText('Bilbao');
+      userEvent.click(answer);
+    });
+
+    test('should validate', () => {
+      expect(answer).toHaveClass('incorrect');
+    });
+
+    test('should disable all buttons', () => {
+      screen.getAllByRole('button').forEach((button) => {
+        expect(button).toBeDisabled();
+      });
+    });
+
+    test('should show the correct answer', () => {
+      const correctButton = screen.getByText(correctAnswer)
+      expect(correctButton).toHaveClass('correct');
+    })
+  });
+
+  describe('after click on a correct answer', () => {
+    let answer;
+
+    beforeAll(() => {
+      answer = screen.getByText(correctAnswer);
+      userEvent.click(answer);
+    });
+
+    test('should validate', () => {
+      expect(answer).toHaveClass('correct');
+    });
   });
 });
