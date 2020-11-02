@@ -1,5 +1,5 @@
 import { AnswersComponent } from "./answers.component";
-import { screen } from "@testing-library/dom";
+import { screen, waitFor } from "@testing-library/dom";
 import userEvent from '@testing-library/user-event'
 
 describe('Testing Answer component', () => {
@@ -26,25 +26,25 @@ describe('Testing Answer component', () => {
   describe('after click on a incorrect answer', () => {
     let answer;
 
-    beforeAll(() => {
+    beforeAll(async () => {
       answer = screen.getByText('Bilbao');
       userEvent.click(answer);
     });
 
     test('should validate', () => {
-      expect(answer).toHaveClass('incorrect');
+      waitFor(() => expect(answer).toHaveClass('incorrect'));
     });
 
     test('should disable all buttons', () => {
       screen.getAllByRole('button').forEach((button) => {
-        expect(button).toBeDisabled();
+        waitFor(() => expect(button).toBeDisabled());
       });
     });
 
-    test('should show the correct answer', () => {
+    test('should show the correct answer', async () => {
       const correctButton = screen.getByText(correctAnswer)
-      expect(correctButton).toHaveClass('correct');
-    })
+      waitFor(() => expect(correctButton).toHaveClass('correct'));
+    });
   });
 
   describe('after click on a correct answer', () => {
@@ -55,8 +55,8 @@ describe('Testing Answer component', () => {
       userEvent.click(answer);
     });
 
-    test('should validate', () => {
-      expect(answer).toHaveClass('correct');
+    test('should validate', async () => {
+      waitFor(() => expect(answer).toHaveClass('correct'));
     });
   });
 });
