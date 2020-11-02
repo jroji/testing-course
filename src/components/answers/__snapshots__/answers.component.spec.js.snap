@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Answer component should match snapshot 1`] = `
+<body>
+  <main>
+    <button
+      class="answer-button"
+    >
+      Madrid
+    </button>
+    <button
+      class="answer-button"
+    >
+      Pekin
+    </button>
+    <button
+      class="answer-button"
+    >
+      Bilbao
+    </button>
+    <button
+      class="answer-button"
+    >
+      Kiev
+    </button>
+  </main>
+</body>
+`;

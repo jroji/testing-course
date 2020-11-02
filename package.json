@@ -19,6 +19,7 @@
     "eslint": "^7.12.1",
     "eslint-plugin-jest-dom": "^3.2.4",
     "jest": "^26.6.1",
+    "jest-axe": "^4.1.0",
     "jest-runner-eslint": "^0.10.0",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",

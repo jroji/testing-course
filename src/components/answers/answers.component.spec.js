@@ -1,6 +1,14 @@
 import { AnswersComponent } from "./answers.component";
 import { screen, waitFor } from "@testing-library/dom";
+import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event'
+
+const getBodyMain = () => {
+  const main = document.createElement('main');
+  document.body.appendChild(main);
+
+  return main;
+};
 
 describe('Testing Answer component', () => {
   let answers;
@@ -9,8 +17,16 @@ describe('Testing Answer component', () => {
   beforeAll(() => {
     answers = ['Madrid', 'Pekin', 'Bilbao', 'Kiev'];
     correctAnswer = 'Madrid';
+    const main = getBodyMain();
+    new AnswersComponent(main, answers, correctAnswer);
+  });
 
-    new AnswersComponent(document.body, answers, correctAnswer);
+  test('should match snapshot', () => {
+    expect(document.body).toMatchSnapshot();
+  });
+
+  test('should pass a11y validation', async () => {
+    expect(await axe(document.body)).toHaveNoViolations();
   });
 
   test('should render a button for each answer', () => {

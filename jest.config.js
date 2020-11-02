@@ -1,8 +1,8 @@
 module.exports = {
+  verbose: true,
   projects: [
     {
       displayName: "test",
-      verbose: true,
       setupFilesAfterEnv: [
         './jest.setup.js'
       ],
