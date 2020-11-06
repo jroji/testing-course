@@ -81,7 +81,13 @@ export class Quiz {
     return element;
   }
 
-  handleAnswer() {
+  handleAnswer(event) {
+    if (event.detail) {
+      let currentScore = parseInt(localStorage.getItem('score') || 0);
+      currentScore++;
+      document.querySelector('.score').textContent = `Score: ${currentScore}`;
+      localStorage.setItem('score', currentScore);
+    }
     this.nextButton.style.display = 'block';
   }
 }
