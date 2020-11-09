@@ -63,10 +63,6 @@ body {
   align-self: flex-start;
   margin-bottom: 10px;
 }
-.score {
-  color: var(--color-white);
-  align-self: flex-start;
-}
 
 .answers {
   padding: calc(var(--spacing) * 2);

@@ -9,6 +9,10 @@ export class Quiz {
 
   constructor(htmlContainer, countryService) {
     this.htmlContainer = htmlContainer;
+    const score = document.createElement('p');
+    score.textContent = 'Score: 0';
+    score.className = 'score';
+    this.htmlContainer.appendChild(score)
     this.countryService = countryService;
     this.renderNextButton(htmlContainer);
     this.htmlContainer.addEventListener('answerClick', (event) => this.handleAnswer(event));
