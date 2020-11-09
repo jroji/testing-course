@@ -9,10 +9,7 @@ export class Quiz {
 
   constructor(htmlContainer, countryService) {
     this.htmlContainer = htmlContainer;
-    const score = document.createElement('p');
-    score.textContent = 'Score: 0';
-    score.className = 'score';
-    this.htmlContainer.appendChild(score)
+    this.htmlContainer.appendChild(this.createElement('p', 'Score: 0'))
     this.countryService = countryService;
     this.renderNextButton(htmlContainer);
     this.htmlContainer.addEventListener('answerClick', (event) => this.handleAnswer(event));
@@ -81,7 +78,9 @@ export class Quiz {
   createElement(tag, content, testId) {
     const element = document.createElement(tag);
     element.textContent = content;
-    element.setAttribute('data-testid', testId);
+    if (testId) {
+      element.setAttribute('data-testid', testId);
+    }
     return element;
   }
 
